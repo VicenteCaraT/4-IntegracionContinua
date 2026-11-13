@@ -35,4 +35,4 @@ jobs:
           cat /tmp/app.log
           exit 1
       - name: Escanear aplicación con OWASP ZAP
-        run: docker run --rm --network host ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://127.0.0.1:3000 -I
+        run: docker run --rm --network host ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t 'http://127.0.0.1:3000/total?p=100&c=2' -I
