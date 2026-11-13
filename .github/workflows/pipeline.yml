@@ -22,3 +22,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Escanear configuración con Trivy
         run: docker run --rm -v "$PWD":/src aquasec/trivy:latest config --exit-code 1 --severity HIGH,CRITICAL /src
+      - name: Iniciar aplicación para ZAP
+        run: node app.js > /tmp/app.log 2>&1 &
+      - name: Esperar a que la aplicación esté lista
+        run: |
+          for i in $(seq 1 30); do
+            if curl --fail --silent "http://127.0.0.1:3000/total?p=100&c=2" >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/app.log
+          exit 1
+      - name: Escanear aplicación con OWASP ZAP
+        run: docker run --rm --network host ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://127.0.0.1:3000 -I
