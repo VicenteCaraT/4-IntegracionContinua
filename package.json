@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/VicenteCaraT/4-IntegracionContinua#readme",
   "dependencies": {
-    "express": "^5.3.0",
-    "lodash": "^4.17.15"
+    "express": "^5.3.0"
   }
 }
