@@ -1,13 +1,16 @@
 # Seguimiento — TP4: Integración Continua
 
-## Evidencias registradas
+## Evidencias de fallas detectadas
 
-- [x] Falla de código detectada por Semgrep: `evidencias/falla-codigo-semgrep.png`.
-- [x] Falla SCA de Lodash vulnerable detectada por `npm audit --audit-level=high`; evidencia: `evidencias/falla-libreria-npm-audit.png`.
+- [x] La rama `falla-secreto` mostró la detección del token ficticio con Gitleaks. La PR se conserva sin fusionar.
+- [x] La rama `falla-codigo` mostró el hallazgo de `eval` por Semgrep: `evidencias/falla-codigo-semgrep.png`.
+- [x] La rama `falla-libreria` mostró la vulnerabilidad alta de Lodash: `evidencias/falla-libreria-npm-audit.png`.
 
-## Pendiente
+## Estado de correcciones
 
-- [ ] Corregir y fusionar PR de SCA.
-- [ ] Probar y corregir el test roto.
-- [ ] Cerrar sin fusionar la PR del secreto ficticio.
+- [x] Código inseguro corregido en la rama `falla-codigo`; resta confirmar el estado de fusión.
+- [x] Lodash vulnerable quitado de `package.json` y `package-lock.json`; commit creado en `falla-libreria`.
+- [ ] Confirmar que el pipeline de la PR `falla-libreria` queda verde y fusionarla.
+- [ ] Ejecutar y corregir la rama `falla-test`.
+- [ ] Cerrar la PR del secreto sin fusionarla y conservar evidencia.
 - [ ] Completar retos extra: protección de `main`, Trivy y ZAP.
