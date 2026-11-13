@@ -10,7 +10,14 @@ app.get("/total", (req, res) => {
 });
 
 app.get("/calcular", (req, res) => {
-  res.json({ resultado: eval(req.query.expr) });
+  const a = Number(req.query.a);
+  const b = Number(req.query.b);
+
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    return res.status(400).json({ error: "a y b deben ser números" });
+  }
+
+  return res.json({ resultado: a + b });
 });
 module.exports = { app, total };
 
